@@ -40,12 +40,12 @@ function runSearch() {
       tempF,
       response.name
     );
+    getFiveDay();
   });
-  getFiveDay();
 }
 
 function appendWeather(speed, humidity, tempF, name) {
-  currentWeather.append("<p>Wind Speed: " + speed + "</p>");
+  currentWeather.append("<p>Wind Speed: " + speed + " MPH" + "</p>");
   currentWeather.append("<p>Humidity: " + humidity + "</p>");
   currentWeather.append("<p>Temperature (F): " + tempF + "</p>");
 
@@ -78,11 +78,22 @@ function getFiveDay() {
 }
 
 function appendForecast(list) {
-  for (var i = 0; i <= 4; i++) {
-    var date = moment(list[i].dt).calendar();
-    forecast.append("<p>" + date + "</p>");
-    forecast.append("<p>" + convertKelvin(list[i].main.temp) + "</p>");
-    forecast.append("<p>" + list[i].main.humidity + "</p>");
+  for (var i = 0; i <= 40; i += 8) {
+    var date = moment(list[i].dt_txt).format("MM/DD/YYYY");
+
+    var card = $('<div class="card" style="width: 18rem;">');
+    var cardBody = $('<div class="card-body"></div>');
+    var cardTitle = $('<h5 class="card-title"></h5> ');
+    var cardTemp = $('<p class="card-text" id="card-temp"></p> ');
+    var cardHumidity = $('<p class="card-text" id="card-humidity"></p> ');
+
+    cardTitle.append(date);
+    cardTemp.append("Temperature: " + convertKelvin(list[i].main.temp));
+    cardHumidity.append("Humidity: " + list[i].main.humidity);
+
+    cardBody.append([cardTitle, cardTemp, cardHumidity]);
+    card.append(cardBody);
+    forecast.append(card);
   }
 }
 
