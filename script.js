@@ -81,7 +81,7 @@ function getFiveDay() {
   var citySearch = $("#search-input").val();
 
   var queryURL =
-    "http://api.openweathermap.org/data/2.5/forecast?&appid=" +
+    "https://api.openweathermap.org/data/2.5/forecast?&appid=" +
     APIKey +
     "&q=" +
     citySearch;
