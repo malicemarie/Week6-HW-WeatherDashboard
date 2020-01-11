@@ -51,7 +51,8 @@ function runSearch() {
 
     $.ajax({
       url: queryURL,
-      method: "GET"
+      method: "GET",
+      dataType: "jsonp"
     }).then(function(response) {
       console.log(queryURL);
 
@@ -81,7 +82,7 @@ function getFiveDay() {
   var citySearch = $("#search-input").val();
 
   var queryURL =
-    "https://api.openweathermap.org/data/2.5/forecast?&appid=" +
+    "http://api.openweathermap.org/data/2.5/forecast?&appid=" +
     APIKey +
     "&q=" +
     citySearch;
@@ -90,7 +91,8 @@ function getFiveDay() {
 
   $.ajax({
     url: queryURL,
-    method: "GET"
+    method: "GET",
+    dataType: "jsonp"
   }).then(function(response) {
     console.log(queryURL);
 
