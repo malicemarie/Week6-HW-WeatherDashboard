@@ -34,13 +34,35 @@ function runSearch() {
     var tempF = convertKelvin(response.main.temp);
     $(".tempF").text("Temperature (Kelvin) " + tempF);
 
+    //http://api.openweathermap.org/data/2.5/uvi?appid={appid}&lat={lat}&lon={lon}
+
+    getFiveDay();
+
+    var cityLatitude = response.coord.lat;
+    var cityLongitude = response.coord.lon;
+
+    var queryURL =
+      "http://api.openweathermap.org/data/2.5/uvi?appid=" +
+      APIKey +
+      "&lat=" +
+      cityLatitude +
+      "&lon=" +
+      cityLongitude;
+
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+      console.log(queryURL);
+
+      console.log(response);
+    });
     appendWeather(
       response.wind.speed,
       response.main.humidity,
       tempF,
       response.name
     );
-    getFiveDay();
   });
 }
 
@@ -48,6 +70,7 @@ function appendWeather(speed, humidity, tempF, name) {
   currentWeather.append("<p>Wind Speed: " + speed + " MPH" + "</p>");
   currentWeather.append("<p>Humidity: " + humidity + "</p>");
   currentWeather.append("<p>Temperature (F): " + tempF + "</p>");
+  // currentWeather.append("<p>UV Index: " + UVIndex + "</p>");
 
   var currentDate = moment().calendar();
 
