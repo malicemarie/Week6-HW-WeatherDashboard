@@ -1,4 +1,5 @@
 # Week6-HW-WeatherDashboard
+[Weather Dashboard](https://malicemarie.github.io/Week6-HW-WeatherDashboard/)
 
 Homework for week 06 - Server APIs
 
